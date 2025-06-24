@@ -6,14 +6,12 @@ import os
 
 def generar_nombre_unico(base_path: Path) -> Path:
   # Si base_path existe, agrega _1, _2, etc. al nombre hasta que no exista.
-  print("base_path: ", base_path)
   if not base_path.exists():
     return base_path
   
   contador = 1
   while True:
     nuevo_nombre = base_path.with_stem(f"{base_path.stem}_{contador}")
-    print("nuevo_nombre: ", nuevo_nombre)
     if not nuevo_nombre.exists():
       return nuevo_nombre
     contador += 1
@@ -39,10 +37,9 @@ def generar_pdf_filtrado(pagina, path_root):
   pdf_filtrado.close()
 
 # Se selecciona pdf donde se buscara los datos ingresados
-carpeta_origen = seleccionar_ruta("Seleccionar ruta a buscar")
-palabras_clave = input("Ingrese las palabras clave separadas por comas sin espacios: ").strip().split(',')
+carpeta_origen = seleccionar_ruta("Seleccionar ruta de origen")
 carpeta_salida = seleccionar_ruta("Seleccionar carpeta de destino")
-pagina_encontrada = []
+palabras_clave = input("Ingrese las palabras clave separadas por comas sin espacios: ").strip().split(',')
 
 print("Buscando palabras clave...")
 for root, _, files in os.walk(carpeta_origen):
@@ -57,4 +54,6 @@ for root, _, files in os.walk(carpeta_origen):
             break
 
       archivo_actual.close()
+
+print("Proceso completado.")
   
