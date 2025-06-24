@@ -12,9 +12,15 @@ if not exist "Salida" (
   echo La carpeta ya existe.
 )
 
-where python >nul 2>nul
+for /f "tokens=*" %%v in ('python --version 2^>nul') do set "PYTHON_VERSION=%%v"
 
-if %errorlevel%==0 (
+if "%PYTHON_VERSION%"=="" (
+  echo Python no instalado o no en PATH.
+  echo Instale Python desde https://www.python.org/downloads/
+  pause
+) else (
+  echo Python encontrado: %PYTHON_VERSION%
+  echo ===============================
   echo Python instalado.
   python --version
   echo Ejecutando script...
@@ -28,11 +34,7 @@ if %errorlevel%==0 (
   pip install -r requirements.txt
   cls
   python .\app.py
-) else (
-  echo Python no instalado o no en PATH.
-  echo Instale Python desde https://www.python.org/downloads/
-  pause
-  exit /b
+
 )
 
 echo .
