@@ -18,6 +18,7 @@ if "%PYTHON_VERSION%"=="" (
   echo Python no instalado o no en PATH.
   echo Instale Python desde https://www.python.org/downloads/
   pause
+  exit /b
 ) else (
   echo Python encontrado: %PYTHON_VERSION%
   echo ===============================
